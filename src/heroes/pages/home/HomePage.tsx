@@ -8,8 +8,7 @@ import { HeroGrid } from '@/heroes/components/HeroGrid';
 import { CustomPagination } from "@/components/custom/CustomPagination"
 import { CustomBreadcrumbs } from '@/components/custom/CustomBreadcrumbs';
 import { useQueryHeroSummary } from '@/heroes/hooks/useQueryHeroSummary';
-import { getHeroesByPageAction } from '@/heroes/actions/get-heroes-by-page.action';
-import { useQuery } from '@tanstack/react-query';
+import { useQueryPaginatedHero } from '@/heroes/hooks/useQueryPaginatedHero';
 
 //import { usePaginatedHero } from '@/heroes/hooks/usePaginatedHero';
 
@@ -28,15 +27,18 @@ export const HomePage = () => {
 
     //const { data: heroesResponse } = CustomPagination(+page);
 
+    // TanStack Query para los héroes paginados
     //  {page: +page, limit: +limit, category: category} como objeto 
     // por si en el futuro se quieren agregar más filtros o cambiar el orden de estos
-    const { data: heroesResponse } = useQuery({
-        queryKey: ['heroes', { page: +page, limit: +limit, category: category }],
-        queryFn: () => getHeroesByPageAction(+page, +limit),
-        staleTime: 1000 * 60 * 5, // 5 minutes
-    });
+    const { data: heroesResponse } = useQueryPaginatedHero(+page, +limit, category);
+    // const { data: heroesResponse } = useQuery({
+    //     queryKey: ['heroes', { page: +page, limit: +limit, category: category }],
+    //     queryFn: () => getHeroesByPageAction(+page, +limit),
+    //     staleTime: 1000 * 60 * 5, // 5 minutes
+    // });
 
-    const { data: summary } = useQueryHeroSummary();
+    // TanStack Query para el resumen de héroes
+    const { data: summaryInformation } = useQueryHeroSummary();
 
     return (
         <>
@@ -66,7 +68,7 @@ export const HomePage = () => {
                                 })
                             }
                         >
-                            All Characters ({summary?.totalHeroes})
+                            All Characters ({summaryInformation?.totalHeroes})
                         </TabsTrigger>
                         <TabsTrigger
                             value="favorites"
@@ -91,7 +93,7 @@ export const HomePage = () => {
                                 })
                             }
                         >
-                            Heroes ({summary?.heroCount})
+                            Heroes ({summaryInformation?.heroCount})
                         </TabsTrigger>
                         <TabsTrigger
                             value="villains"
@@ -104,7 +106,7 @@ export const HomePage = () => {
                                 })
                             }
                         >
-                            Villains ({summary?.villainCount})
+                            Villains ({summaryInformation?.villainCount})
                         </TabsTrigger>
                     </TabsList>
 
