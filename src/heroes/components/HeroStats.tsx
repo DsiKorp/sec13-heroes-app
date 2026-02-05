@@ -1,14 +1,23 @@
+import { use, useMemo } from "react";
 
 import { Badge } from "@/components/ui/badge"
 import { Heart, Trophy, Users, Zap } from "lucide-react"
 
 import { HeroStatCard } from "./HeroStatCard"
 import { useQueryHeroSummary } from "../hooks/useQueryHeroSummary";
+import { FavoriteHeroContext } from "../context/FavoriteHeroContext";
 
 
 export const HeroStats = () => {
 
     const { data: summaryInformation } = useQueryHeroSummary();
+    const { favoriteCount } = use(FavoriteHeroContext);
+
+    // const percentageOfFavorites = summaryInformation && summaryInformation.totalHeroes > 0
+    //     ? ((favoriteCount / summaryInformation.totalHeroes) * 100).toFixed(1)
+    //     : '0.0';
+
+
 
     //     const { data: summaryInformation } = useQuery({
     //     queryKey: ['summary-information'],
@@ -16,6 +25,10 @@ export const HeroStats = () => {
     //     //queryFn: () => getSummaryAction(),
     //     staleTime: 1000 * 60 * 5, // 5 minutes
     // });
+
+    if (!summaryInformation) {
+        return <div>Loading...</div>
+    }
 
 
     return (
@@ -40,8 +53,8 @@ export const HeroStats = () => {
                 icon={<Heart className="h-4 w-4 text-muted-foreground" />}
             >
                 {/* TODO: calcular este valor */}
-                <div className="text-2xl font-bold text-red-600">3</div>
-                <p className="text-xs text-muted-foreground">18.8% of total</p>
+                <div className="text-2xl font-bold text-red-600">{favoriteCount}</div>
+                <p className="text-xs text-muted-foreground">{((favoriteCount / summaryInformation?.totalHeroes) * 100).toFixed(2)}% of total</p>
             </HeroStatCard>
 
             <HeroStatCard
