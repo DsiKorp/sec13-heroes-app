@@ -41,6 +41,12 @@ export const SearchControls = () => {
         }
     }
 
+    const handleSearch = () => {
+        const value = inputRef.current?.value ?? '';
+        console.log(value);
+        setQueryParams('name', value);
+    }
+
 
 
     return (
@@ -60,8 +66,13 @@ export const SearchControls = () => {
                 </div>
 
                 {/* Action buttons */}
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                     {/* para volver el boton transparente bg-transparent */}
+                    <Button className="h-12 w-full sm:w-auto" onClick={handleSearch}>
+                        <Search className="h-4 w-4 mr-2" />
+                        Search
+                    </Button>
+
                     <Button variant={activeAccordion === 'advanced-filters' ? 'default' : 'outline'} className="h-12"
 
                         onClick={() => {
@@ -101,6 +112,9 @@ export const SearchControls = () => {
                         <Plus className="h-4 w-4 mr-2" />
                         Add Character
                     </Button>
+
+
+
                 </div>
             </div>
 

@@ -59,9 +59,10 @@ export const HomePage = () => {
 
                 {/* Tabs */}
                 <Tabs value={selectedTab} className="mb-8">
-                    <TabsList className="grid w-full grid-cols-4">
+                    <TabsList className="grid w-full grid-cols-2 md:grid-cols-4">
                         <TabsTrigger
                             value="all"
+                            className="border border-gray-300 data-[state=active]:border-transparent"
                             onClick={() =>
                                 setSearchParams((prev) => {
                                     prev.set('tab', 'all');
@@ -75,7 +76,7 @@ export const HomePage = () => {
                         </TabsTrigger>
                         <TabsTrigger
                             value="favorites"
-                            className="flex items-center gap-2"
+                            className="flex items-center gap-2 border border-gray-300 data-[state=active]:border-transparent"
                             onClick={() =>
                                 setSearchParams((prev) => {
                                     prev.set('tab', 'favorites');
@@ -87,6 +88,7 @@ export const HomePage = () => {
                         </TabsTrigger>
                         <TabsTrigger
                             value="heroes"
+                            className="border border-gray-300 data-[state=active]:border-transparent"
                             onClick={() =>
                                 setSearchParams((prev) => {
                                     prev.set('tab', 'heroes');
@@ -100,6 +102,7 @@ export const HomePage = () => {
                         </TabsTrigger>
                         <TabsTrigger
                             value="villains"
+                            className="border border-gray-300 data-[state=active]:border-transparent"
                             onClick={() =>
                                 setSearchParams((prev) => {
                                     prev.set('tab', 'villains');
@@ -113,21 +116,21 @@ export const HomePage = () => {
                         </TabsTrigger>
                     </TabsList>
 
-                    <TabsContent value="all">
+                    <TabsContent value="all" className="pt-4 md:pt-0">
                         {/* Mostrar todos los personajes */}
                         <HeroGrid heroes={heroesResponse?.heroes ?? []} />
                     </TabsContent>
-                    <TabsContent value="favorites">
+                    <TabsContent value="favorites" className="pt-4 md:pt-0">
                         {/* Mostrar todos los personajes favoritos */}
                         <h1>Favoritos!!!</h1>
                         <HeroGrid heroes={favorites} />
                     </TabsContent>
-                    <TabsContent value="heroes">
+                    <TabsContent value="heroes" className="pt-4 md:pt-0">
                         {/* Mostrar todos los héroes */}
                         <h1>Héroes</h1>
                         <HeroGrid heroes={heroesResponse?.heroes ?? []} />
                     </TabsContent>
-                    <TabsContent value="villains">
+                    <TabsContent value="villains" className="pt-4 md:pt-0">
                         {/* Mostrar todos los Villanos */}
                         <h1>Villanos</h1>
                         <HeroGrid heroes={heroesResponse?.heroes ?? []} />
