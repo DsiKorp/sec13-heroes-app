@@ -14,7 +14,9 @@ import { FavoriteHeroContext } from '@/heroes/context/FavoriteHeroContext';
 //import { usePaginatedHero } from '@/heroes/hooks/usePaginatedHero';
 
 export const HomePage = () => {
+    // trae los parámetros de la URL
     const [searchParams, setSearchParams] = useSearchParams();
+    // trae los favoritos del contexto
     const { favoriteCount, favorites } = use(FavoriteHeroContext);
 
     const activeTab = searchParams.get('tab') ?? 'all';

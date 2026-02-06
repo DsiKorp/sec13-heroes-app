@@ -64,6 +64,7 @@ const getFavoritesFromLocalStorage = (): Hero[] => {
     }
 }
 
+// higher order component
 export const FavoriteHeroContextProvider = ({ children }: PropsWithChildren) => {
 
     const [favorites, setFavorites] = useState<Hero[]>(getFavoritesFromLocalStorage());
