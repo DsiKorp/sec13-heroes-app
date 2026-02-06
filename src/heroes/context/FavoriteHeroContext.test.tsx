@@ -79,7 +79,7 @@ describe('FavoriteHeroContext', () => {
 
     test('should add hero to favorites when toggleFavorite is called with new Hero', () => {
         renderContextTest();
-        screen.debug();
+        //screen.debug();
         const button = screen.getByTestId('toggle-favorite');
 
         fireEvent.click(button);
@@ -94,7 +94,7 @@ describe('FavoriteHeroContext', () => {
         localStorage.setItem('favorite-heroes', JSON.stringify([mockHero]));
 
         renderContextTest();
-        screen.debug();
+        //screen.debug();
         expect(screen.getByTestId('favorite-count').textContent).toBe('1');
         expect(screen.getByTestId('is-favorite').textContent).toBe('true');
         expect(screen.getByTestId('hero-1').textContent).toBe('Bruce Wayne');
@@ -105,6 +105,6 @@ describe('FavoriteHeroContext', () => {
         expect(screen.getByTestId('favorite-count').textContent).toBe('0');
         expect(screen.getByTestId('is-favorite').textContent).toBe('false');
         expect(screen.queryByTestId('hero-1')).toBeNull();
-        screen.debug();
+        //screen.debug();
     });
 });
