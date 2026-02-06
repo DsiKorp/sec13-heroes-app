@@ -39,7 +39,9 @@ export const CustomPagination = ({ totalPages }: Props) => {
 
             {
                 Array.from({ length: totalPages }).map((_, index) => (
-                    <Button key={index} variant={page === index + 1 ? 'default' : 'outline'} size="sm"
+                    <Button key={index}
+                        variant={page === index + 1 ? 'default' : 'outline'}
+                        size="sm"
                         onClick={() => handlePageChangeUrl(index + 1)}>
                         {index + 1}
                     </Button>

@@ -4,7 +4,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { useQueryHeroSummary } from './useQueryHeroSummary';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { getSummaryAction } from '../actions/get-summary.action';
-import type { SumaryInformationResponse } from '../types/summary-information.response';
+import type { SummaryInformationResponse } from '../types/summary-information.response';
 
 vi.mock('../actions/get-summary.action', () => ({
     getSummaryAction: vi.fn(),
@@ -51,7 +51,7 @@ describe('useHeroSummary', () => {
             },
             heroCount: 18,
             villainCount: 7,
-        } as SumaryInformationResponse;
+        } as SummaryInformationResponse;
 
         mockGetSummaryAction.mockResolvedValue(mockSummaryData);
 

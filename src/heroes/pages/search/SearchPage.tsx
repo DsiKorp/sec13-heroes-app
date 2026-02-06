@@ -49,4 +49,5 @@ export const SearchPage = () => {
 }
 
 // para evitar el .then(module => ({ default: module.SearchPage }))); en app.router.tsx
+// por el lazy loading de React
 export default SearchPage;
