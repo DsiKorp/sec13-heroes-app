@@ -130,7 +130,7 @@ export const HomePage = () => {
                     </TabsContent>
                     <TabsContent value="favorites" className="pt-4 md:pt-0">
                         {/* Mostrar todos los personajes favoritos */}
-                        <h1>Favoritos!!!</h1>
+                        <h1>Heroes Favoritos!!!</h1>
                         <HeroGrid heroes={favorites} />
                     </TabsContent>
                     <TabsContent value="heroes" className="pt-4 md:pt-0">
