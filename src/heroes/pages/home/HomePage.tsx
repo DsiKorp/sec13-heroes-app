@@ -14,16 +14,18 @@ import { FavoriteHeroContext } from '@/heroes/context/FavoriteHeroContext';
 //import { usePaginatedHero } from '@/heroes/hooks/usePaginatedHero';
 
 export const HomePage = () => {
-    // trae los parámetros de la URL
+    // hook para manejar los parámetros de la URL
     const [searchParams, setSearchParams] = useSearchParams();
-    // trae los favoritos del contexto
+    // hook para manejar los favoritos
     const { favoriteCount, favorites } = use(FavoriteHeroContext);
 
+    // trae los parámetros de la URL
     const activeTab = searchParams.get('tab') ?? 'all';
     const page = searchParams.get('page') ?? '1';
     const limit = searchParams.get('limit') ?? '6';
     const category = searchParams.get('category') ?? 'all';
 
+    // hook para manejar el tab seleccionado, useMemo para evitar recalcular en cada render
     const selectedTab = useMemo(() => {
         const validTabs = ['all', 'favorites', 'heroes', 'villains'];
         return validTabs.includes(activeTab) ? activeTab : 'all';
@@ -34,6 +36,7 @@ export const HomePage = () => {
     // TanStack Query para los héroes paginados
     //  {page: +page, limit: +limit, category: category} como objeto 
     // por si en el futuro se quieren agregar más filtros o cambiar el orden de estos
+    // useQueryPaginatedHero recibe los parámetros como argumentos directos, hook personalizado
     const { data: heroesResponse } = useQueryPaginatedHero(+page, +limit, category);
     // const { data: heroesResponse } = useQuery({
     //     queryKey: ['heroes', { page: +page, limit: +limit, category: category }],
@@ -42,6 +45,7 @@ export const HomePage = () => {
     // });
 
     // TanStack Query para el resumen de héroes
+    // hook personalizado para resumir la información de los héroes
     const { data: summaryInformation } = useQueryHeroSummary();
 
 
@@ -49,17 +53,19 @@ export const HomePage = () => {
         <>
             <>
                 {/* Header */}
+                {/* Custom Jumbotron para el título y descripción , componentes reutilizables */}
                 <CustomJumbotron
                     title="Universo de SuperHéroes"
                     description="Descubre, explora y administra super héroes y villanos"
                 />
 
+                {/* Custom Breadcrumbs para la navegación */}
                 <CustomBreadcrumbs currentPage="Super Héroes" />
 
-                {/* Stats Dashboard */}
+                {/* Stats Dashboard para mostrar información general */}
                 <HeroStats />
 
-                {/* Tabs */}
+                {/* Tabs para filtrar los héroes */}
                 <Tabs value={selectedTab} className="mb-8">
                     <TabsList className="grid w-full grid-cols-2 md:grid-cols-4">
                         <TabsTrigger
@@ -139,7 +145,7 @@ export const HomePage = () => {
                     </TabsContent>
                 </Tabs>
 
-                {/* Pagination */}
+                {/* Pagination para los tabs que no son favoritos */}
                 {
                     selectedTab !== 'favorites' && (
                         <CustomPagination totalPages={heroesResponse?.pages ?? 1} />

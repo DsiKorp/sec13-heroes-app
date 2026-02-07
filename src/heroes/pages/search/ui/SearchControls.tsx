@@ -112,14 +112,13 @@ export const SearchControls = () => {
                         <Plus className="h-4 w-4 mr-2" />
                         Add Character
                     </Button>
-
-
-
                 </div>
             </div>
 
             {/* Advanced Filters */}
-            <Accordion type="single" collapsible value={activeAccordion}>
+            <Accordion type="single" collapsible value={activeAccordion}
+                data-testid="accordion"
+            >
                 <AccordionItem value="advanced-filters">
                     {/* boton para ocultar o mostrar el filtro */}
                     {/* <AccordionTrigger>Advanced Filters</AccordionTrigger> */}
